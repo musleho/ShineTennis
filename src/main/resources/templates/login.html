@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang='en' xmlns:th='https://www.thymeleaf.org'
+  xmlns:sec='https://www.thymeleaf.org/thymeleaf-extras-springsecurity5'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <!-- Bootstrap 5.2.2 CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' rel='stylesheet'
+    integrity='sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi' crossorigin='anonymous'>
+
+  <!-- Fontawesome 6.2.0 CSS -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css'
+    integrity='sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=='
+    crossorigin='anonymous' referrerpolicy='no-referrer' />
+
+  <!-- Bootstrap 5.2.2 JavaScript Bundle with Popper -->
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js'
+    integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3'
+    crossorigin='anonymous'></script>
+
+  <!-- Custom CSS -->
+  <link rel='stylesheet' type='text/css' th:href='@{assets/styles/shared.css}'>
+
+  <!-- jQuery 3.6.1 -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
+    integrity='sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=='
+    crossorigin='anonymous' referrerpolicy='no-referrer'></script>
+
+  <title>Title</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <div class="container-fluid px-4 px-lg-5">
+      <a class="navbar-brand" href="#"><img src="../assets/img/logo-dark.png" alt="logo" class="img-fluid">
+        <span class="text-light fs-4">Shine Tennis</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link active btn btn-link" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-link" href="/view">View</a>
+          </li>
+          <li class="nav-item" sec:authorize="hasRole('VENDOR')">
+            <a class="nav-link btn btn-link" href="/uranerd">Stats</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAnonymous()">
+            <a class="nav-link text-light btn btn-danger mx-3" href="/register">Register</a>
+          </li>
+          <li class="nav-item" sec:authorize="hasRole('VENDOR')">
+            <a class="nav-link text-light btn btn-danger mx-3" href="/book">Book</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post" class="mx-2">
+              <input type="submit" value="Logout" class="btn btn-warning" />
+            </form>
+          </li>
+          <li class="nav-item" sec:authorize="isAnonymous()">
+            <form th:action="@{/login}" method="get" class="mx-2">
+              <input type="submit" value="Log In" class="btn btn-warning" />
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="w-50 rounded shadow shadow-dark d-flex flex-column align-items-center"
+      style="min-width: 350px !important; background-color: rgba(45, 45, 45, 0.7) !important;">
+      <h2 class="display-6 mt-1">Login</h2>
+      <form th:action="@{/login}" method="post" class="login w-75 mx-3 my-3 px-3 py-2 justify-content-center">
+        <div class="form-group my-3">
+          <label for="username">Username:</label>
+          <input type="text" class="form-control bg-transparent text-light rounded-pill" id="username" name="username"
+            aria-describedby="nameHelp" placeholder="Enter your username">
+        </div>
+        <div class="form-group mt-1 mb-3">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control bg-transparent text-light rounded-pill" id="password"
+            name="password" placeholder="Enter password">
+        </div>
+        <div class="w-100 d-flex justify-content-center">
+          <input type="submit" value="Log In" class="btn btn-warning rounded py-2 px-3">
+        </div>
+      </form>
+      <div th:if="${param.error}" class="d-flex w-100 h-100 justify-content-center bg-danger my-1">
+        <span class="fs-7 text-light my-2">Invalid login information!</span>
+      </div>
+      <div th:if="${param.logout}" class="d-flex w-100 h-100 justify-content-center bg-light my-1">
+        <span class="fs-7 text-dark my-2">You have successfully logged out</span>
+      </div>
+      <span class="align-self-flex-end my-2">Not a member?&nbsp;<a href="/register">Sign up</a>!</span>
+    </div>
+  </div>
+</body>
+
+</html>

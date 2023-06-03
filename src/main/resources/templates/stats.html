@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='en' xlmns:th='https://www.thymeleaf.org'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+    rel="stylesheet" type="text/css" />
+
+  <!-- Bootstrap 5.2.2 CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' rel='stylesheet'
+    integrity='sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi' crossorigin='anonymous'>
+
+  <!-- Fontawesome 6.2.0 CSS -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css'
+    integrity='sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=='
+    crossorigin='anonymous' referrerpolicy='no-referrer' />
+
+  <!-- Custom CSS -->
+  <link rel='stylesheet' href='assets/styles/shared.css'>
+
+  <!-- Bootstrap 5.2.2 JavaScript Bundle with Popper -->
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js'
+    integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3'
+    crossorigin='anonymous'></script>
+
+  <!-- jQuery 3.6.1 -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'
+    integrity='sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=='
+    crossorigin='anonymous' referrerpolicy='no-referrer'></script>
+
+  <!-- Custom Scripts -->
+  <script src='scripts/script.js'></script>
+
+  <title>Stats for Nerds</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <div class="container-fluid px-4 px-lg-5">
+      <a class="navbar-brand" href="/"><img src="../assets/img/logo-dark.png" alt="logo" class="img-fluid">
+        <span class="text-light fs-4">Shine Tennis</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link btn btn-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-link" href="/view">View</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active btn btn-link" href="#">Stats</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light btn btn-danger mx-3" href="/book">Book</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container px-4 h-100 w-100 py-2 table-holder table-responsive shadow align-items-center">
+    <table class="table table-transparent table-bordered text-center" th:object="${stats}">
+      <thead class="thead-dark">
+        <tr class="text-light">
+          <th>Average Ticket Price</th>
+          <th>Revenues</th>
+          <th>Percent under 25</th>
+          <th>Standard Tickets Sold</th>
+          <th>Enhanced Tickets Sold</th>
+          <th>VIP Tickets Sold</th>
+        </tr>
+      </thead>
+      <tr class="text-light">
+        <td th:text='${stats.saleAverage}'></td>
+        <td th:text='${stats.revenue}'></td>
+        <td th:text='${stats.youngPct + "%"}'></td>
+        <td th:text="${stats.stdCount}"></td>
+        <td th:text="${stats.enhCount}"></td>
+        <td th:text="${stats.vipCount}"></td>
+      </tr>
+      </a>
+    </table>
+  </div>
+  <div class="d-flex w-100 justify-content-center">
+    <a href="/" class="btn btn-warning">Go Back</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+@import url(shared.css);
+
+.table-holder {
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 20px;
+}
+
+.data-row:hover {
+    cursor: pointer !important;
+    color: rgba(255,255,255,0.7) !important;
+    background-color: rgba(0,0,0,0.7) !important;
+}
